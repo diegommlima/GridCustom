@@ -15,6 +15,7 @@
 @property (nonatomic, strong) GridView *gridView;
 @property (nonatomic, strong) NSMutableArray *arrayChannels;
 @property (nonatomic, strong) NSMutableArray *arrayTimes;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -29,6 +30,11 @@ static int kWidthfor30Minutes = 120;
 
 @implementation GridViewController
 
+- (void)dealloc {
+    
+    [self.timer invalidate];
+    self.timer = nil;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,6 +47,10 @@ static int kWidthfor30Minutes = 120;
     self.gridView.gridViewDelegate = self;
     self.gridView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.gridView];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 2, 0.0f)];
+    imgView.backgroundColor = [UIColor yellowColor];
+    [self.gridView setFloatingView:imgView];
     
     self.arrayChannels = [NSMutableArray array];
     self.arrayTimes = [NSMutableArray array];
@@ -77,6 +87,15 @@ static int kWidthfor30Minutes = 120;
     
     [self.gridView reloadData];
     
+    [self updateNowTime];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateNowTime) userInfo:nil repeats:YES];
+}
+
+- (void)updateNowTime {
+    
+    NSTimeInterval timeStampMin = [NSDate todayWithHours:4].timeIntervalSince1970;
+    float posX = ([NSDate date].timeIntervalSince1970-timeStampMin);
+    self.gridView.floatingView.center = CGPointMake((((posX*kWidthfor30Minutes)/kTimeStampSection)+kWidthSection) + (self.gridView.floatingView.frame.size.width/2), self.gridView.floatingView.frame.size.height/2);
 }
 
 - (void)didReceiveMemoryWarning

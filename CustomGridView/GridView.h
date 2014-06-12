@@ -25,9 +25,6 @@
 - (UIView *)gridView:(GridView *)gridView leftViewForRect:(CGRect)rect index:(NSUInteger)index;
 - (UIView *)gridView:(GridView *)gridView headerViewForRect:(CGRect)rect index:(NSUInteger)index;
 
-- (CGSize)gridView:(GridView *)gridView sizeForLeftRowAtIndexPath:(NSInteger)row;//LeftViews(Fix)
-- (CGSize)gridView:(GridView *)gridView sizeForHeaderRowAtIndexPath:(NSInteger)row;//HeaderViews(Fix)
-
 - (void)gridView:(GridView *)gridView didSelectCell:(UIView *)cell indexPath:(GridIndexPath *)indexPath;
 - (void)gridView:(GridView *)gridView didSelectLeftCell:(UIView *)cell index:(NSInteger)index;
 - (void)gridView:(GridView *)gridView didSelectHeaderCell:(UIView *)cell index:(NSInteger)index;
@@ -36,6 +33,8 @@
 @end
 
 @interface GridView : UIScrollView
+
+@property (nonatomic, strong) UIView *floatingView;
 
 @property (nonatomic, weak) id <GridViewDelegate> gridViewDelegate;
 @property (nonatomic, assign) BOOL bounceInSections;

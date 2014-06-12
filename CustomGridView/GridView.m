@@ -125,10 +125,20 @@
     self.anchorView.center = CGPointMake(centerAnchorX, centerAnchorY);
     self.anchorLeftView.center = CGPointMake(centerAnchorX, centerLeftY);
     self.anchorHeaderView.center = CGPointMake(centerHeaderX , centerAnchorY);
-
+    
+    self.floatingView.frame = CGRectMake(self.floatingView.frame.origin.x, self.anchorHeaderView.frame.origin.y, self.floatingView.frame.size.width, self.contentSize.height);
+    
+    [self bringSubviewToFront:self.floatingView];
     [self bringSubviewToFront:self.anchorLeftView];
-    [self bringSubviewToFront:self.anchorHeaderView];
     [self bringSubviewToFront:self.anchorView];
+
+}
+
+- (void)setFloatingView:(UIView *)floatingView {
+
+    _floatingView = floatingView;
+    
+    [self addSubview:floatingView];
 }
 
 - (void)reloadData {
@@ -251,7 +261,7 @@
             }
             
             [usedCells setObject:gridViewCell forKey:gridPosition];
-            [self addSubview:gridViewCell];
+            [self insertSubview:gridViewCell atIndex:0];
         }
         index ++;
     }
