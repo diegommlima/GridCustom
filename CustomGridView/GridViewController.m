@@ -63,7 +63,6 @@ static int kWidthfor30Minutes = 120;
         [self.arrayTimes addObject:@(temp)];
         temp +=kTimeStampSection;
     }
-    NSLog(@"DATE:%@",[NSDate date]);
 
     for (int i = 0; i<100; i++) {
         
@@ -84,7 +83,6 @@ static int kWidthfor30Minutes = 120;
         }
         [self.arrayChannels addObject:arrayChannel];
     }
-    NSLog(@"DFIM:%@",[NSDate date]);
 
     [self.gridView reloadData];
     

@@ -38,11 +38,10 @@
     return [NSDate dateWithTimeIntervalSince1970:t + [[NSTimeZone localTimeZone] secondsFromGMT]];
 }
 
-
 - (NSString *)convertDateToString {
     struct tm *timeinfo;
     char buffer[80];
-    
+
     time_t rawtime = [self timeIntervalSince1970] - [[NSTimeZone localTimeZone] secondsFromGMT];
     timeinfo = localtime(&rawtime);
     
