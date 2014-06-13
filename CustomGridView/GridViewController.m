@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSMutableArray *arrayChannels;
 @property (nonatomic, strong) NSMutableArray *arrayTimes;
 @property (nonatomic, strong) NSTimer *timer;
-
 @end
 
 static int kTimeStampSection = 60*30;
@@ -64,8 +63,9 @@ static int kWidthfor30Minutes = 120;
         [self.arrayTimes addObject:@(temp)];
         temp +=kTimeStampSection;
     }
-    
-    for (int i = 0; i<20; i++) {
+    NSLog(@"DATE:%@",[NSDate date]);
+
+    for (int i = 0; i<100; i++) {
         
         NSTimeInterval timestamp = timeStampMin;
         NSMutableArray *arrayChannel = [NSMutableArray array];
@@ -74,17 +74,18 @@ static int kWidthfor30Minutes = 120;
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             
             int randNum = rand() % ((kTimeStampSection*4) - (kTimeStampSection)) + kTimeStampSection;
-
+            
             [dict setObject:@(timestamp) forKey:@"timeInit"];
             [dict setObject:@(randNum) forKey:@"duration"];
-            [dict setObject:[NSString stringWithFormat:@"%@ - %@",[NSDate convertDateToString:[NSDate dateWithTimeIntervalSince1970:timestamp]], [NSDate convertDateToString:[NSDate dateWithTimeIntervalSince1970:timestamp + randNum]]] forKey:@"name"];
+            [dict setObject:[NSString stringWithFormat:@"%@ - %@",[[NSDate dateWithTimeIntervalSince1970:timestamp] convertDateToString], [[NSDate dateWithTimeIntervalSince1970:timestamp + randNum] convertDateToString]] forKey:@"name"];
             
             [arrayChannel addObject:dict];
             timestamp += randNum;
         }
         [self.arrayChannels addObject:arrayChannel];
     }
-    
+    NSLog(@"DFIM:%@",[NSDate date]);
+
     [self.gridView reloadData];
     
     [self updateNowTime];
@@ -98,6 +99,8 @@ static int kWidthfor30Minutes = 120;
     
     [self showNow];
 }
+
+#pragma mark - Private Methods
 
 - (void)showNow {
     
@@ -220,7 +223,7 @@ static int kWidthfor30Minutes = 120;
     UILabel *cell = (UILabel *)[gridView dequeueReusableHeaderCellWithFrame:rect]?:[[UILabel alloc] initWithFrame:rect];
     
     cell.backgroundColor = [UIColor lightGrayColor];
-    cell.text = [NSString stringWithFormat:@"%@",[NSDate convertDateToString:[NSDate dateWithTimeIntervalSince1970:[self.arrayTimes[index] doubleValue]]]];
+    cell.text = [NSString stringWithFormat:@"%@",[[NSDate dateWithTimeIntervalSince1970:[self.arrayTimes[index] doubleValue]] convertDateToString]];
     cell.layer.borderWidth = 1.0f;
     cell.font = [UIFont fontWithName:@"Helvetica" size:13];
     cell.textAlignment = NSTextAlignmentCenter;
@@ -237,12 +240,12 @@ static int kWidthfor30Minutes = 120;
 
 - (void)gridView:(GridView *)gridView didSelectLeftCell:(UIView *)cell index:(NSInteger)index {
     
-    NSLog(@"ROW:%d",index);
+    NSLog(@"ROW:%ld",(long)index);
 }
 
 - (void)gridView:(GridView *)gridView didSelectHeaderCell:(UIView *)cell index:(NSInteger)index {
     
-    NSLog(@"HEADER:%d",index);
+    NSLog(@"HEADER:%ld",(long)index);
 
 }
 @end

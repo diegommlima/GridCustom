@@ -11,7 +11,6 @@
 @interface NSDate (Helper)
 
 + (NSDate *)todayWithHours:(NSInteger)hour;
-+ (NSString *)convertDateToString:(NSDate *)date;
-+ (NSDate *)convertStringToDate:(NSString *)strDate;
-
+- (NSString *)convertDateToString;
+- (NSDate *)convertStringToDate:(NSString *)strDate;
 @end

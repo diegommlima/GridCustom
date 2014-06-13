@@ -7,6 +7,9 @@
 //
 
 #import "NSDate+Helper.h"
+#include <time.h>
+
+//static NSDateFormatter *format = [[NSDateFormatter alloc] init];
 
 @implementation NSDate (Helper)
 
@@ -20,24 +23,32 @@
     return [calendar dateFromComponents:components];
 }
 
-+ (NSString *)convertDateToString:(NSDate *)date {
-    
-    if (!date)
+- (NSDate *)convertStringToDate:(NSString *)strDate {
+    if (!strDate) {
         return nil;
+    }
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"dd/MM/yyyy HH:mm"];
-    return [formatter stringFromDate:date];
+    struct tm tm;
+    time_t t;
+    
+    strptime([strDate cStringUsingEncoding:NSUTF8StringEncoding], "%d/%m/%Y %H:%M", &tm);
+    tm.tm_isdst = -1;
+    t = mktime(&tm);
+    
+    return [NSDate dateWithTimeIntervalSince1970:t + [[NSTimeZone localTimeZone] secondsFromGMT]];
 }
 
-+ (NSDate *)convertStringToDate:(NSString *)strDate {
+
+- (NSString *)convertDateToString {
+    struct tm *timeinfo;
+    char buffer[80];
     
-    if (!strDate || strDate.length < 1)
-        return nil;
+    time_t rawtime = [self timeIntervalSince1970] - [[NSTimeZone localTimeZone] secondsFromGMT];
+    timeinfo = localtime(&rawtime);
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"dd/MM/yyyy HH:mm"];
-    return [formatter dateFromString:strDate];
+    strftime(buffer, 80, "%d/%m/%Y %H:%M", timeinfo);
+    
+    return [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
 }
 
 @end
