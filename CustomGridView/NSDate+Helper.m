@@ -17,7 +17,7 @@
     NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
     [components setHour:hour];
     
-    return [calendar dateFromComponents:components];;
+    return [calendar dateFromComponents:components];
 }
 
 + (NSString *)convertDateToString:(NSDate *)date {
@@ -26,7 +26,7 @@
         return nil;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"dd/MM/yyyy hh:mm"];
+    [formatter setDateFormat: @"dd/MM/yyyy HH:mm"];
     return [formatter stringFromDate:date];
 }
 
@@ -36,7 +36,7 @@
         return nil;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"dd/MM/yyyy hh:mm"];
+    [formatter setDateFormat: @"dd/MM/yyyy HH:mm"];
     return [formatter dateFromString:strDate];
 }
 

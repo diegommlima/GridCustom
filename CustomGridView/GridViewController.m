@@ -89,13 +89,36 @@ static int kWidthfor30Minutes = 120;
     
     [self updateNowTime];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateNowTime) userInfo:nil repeats:YES];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self showNow];
+}
+
+- (void)showNow {
+    
+    CGFloat center = [self nowPoint];
+    center -= ((self.gridView.frame.size.width/2));
+    [self.gridView setContentOffset:CGPointMake(center, self.gridView.contentOffset.y) animated:YES];
 }
 
 - (void)updateNowTime {
     
+    self.gridView.floatingView.center = CGPointMake([self nowPoint] + (self.gridView.floatingView.frame.size.width/2), self.gridView.floatingView.frame.size.height/2);
+}
+
+- (CGFloat)nowPoint {
+    
     NSTimeInterval timeStampMin = [NSDate todayWithHours:4].timeIntervalSince1970;
     float posX = ([NSDate date].timeIntervalSince1970-timeStampMin);
-    self.gridView.floatingView.center = CGPointMake((((posX*kWidthfor30Minutes)/kTimeStampSection)+kWidthSection) + (self.gridView.floatingView.frame.size.width/2), self.gridView.floatingView.frame.size.height/2);
+    
+    CGFloat returnValue = (((posX*kWidthfor30Minutes)/kTimeStampSection)+kWidthSection);
+    
+    return returnValue;
 }
 
 - (void)didReceiveMemoryWarning
