@@ -18,6 +18,7 @@
 		8539D90D19427730003D8027 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8539D90C19427730003D8027 /* GridViewController.m */; };
 		8539D910194277A7003D8027 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8539D90F194277A7003D8027 /* GridView.m */; };
 		8539D91419428B8B003D8027 /* GridIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8539D91319428B8B003D8027 /* GridIndexPath.m */; };
+		96E75DE91B13729B006D4571 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E75DE81B13729B006D4571 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		8539D90F194277A7003D8027 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		8539D91219428B8B003D8027 /* GridIndexPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridIndexPath.h; sourceTree = "<group>"; };
 		8539D91319428B8B003D8027 /* GridIndexPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridIndexPath.m; sourceTree = "<group>"; };
+		96E75DE81B13729B006D4571 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				852690DC1945F42B005750D1 /* NSDate+Helper.h */,
 				852690DD1945F42B005750D1 /* NSDate+Helper.m */,
 				8539D91119428B6C003D8027 /* Grid */,
+				96E75DE81B13729B006D4571 /* Images.xcassets */,
 			);
 			path = CustomGridView;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8539D8E71942770C003D8027 /* InfoPlist.strings in Resources */,
+				96E75DE91B13729B006D4571 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

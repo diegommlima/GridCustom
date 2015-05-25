@@ -197,7 +197,7 @@ static int kWidthfor30Minutes = 120;
     
     UILabel *cell = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, kWidthSection, kHeightSection)];
     cell.backgroundColor = [UIColor greenColor];
-    cell.text = [NSString stringWithFormat:@"ANCHOR!: %@",@":D"];
+    cell.text = [NSString stringWithFormat:@"ANCHOR: %@", @":)"];
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = [UIColor darkGrayColor].CGColor;
     

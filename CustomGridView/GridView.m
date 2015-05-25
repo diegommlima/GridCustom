@@ -159,12 +159,12 @@
 
         for (GridPosition *gridPosition in self.gridRects) {
             CGRect rect = gridPosition.rectFrame;
-            maxX = MAX(maxX, rect.origin.x + rect.size.width);
-            maxY = MAX(maxY, rect.origin.y + rect.size.height);
+            maxX = fmaxf(maxX, rect.origin.x + rect.size.width);
+            maxY = fmaxf(maxY, rect.origin.y + rect.size.height);
         }
         
-        maxX = MAX(MIN(maxX, self.maximumContentWidth), self.contentSize.width);
-        maxY = MAX(MIN(maxY, self.maximumContentHeight), self.contentSize.height);
+        maxX = fmaxf(fminf(maxX, self.maximumContentWidth), self.contentSize.width);
+        maxY = fmaxf(fminf(maxY, self.maximumContentHeight), self.contentSize.height);
         self.contentSize = CGSizeMake(maxX, maxY);
         
         [self loadCellsInRect:self.visibleRect];
@@ -348,8 +348,8 @@
 - (CGRect)visibleRect {
     CGRect visibleRect;
     
-    visibleRect.origin.x = MAX(self.contentOffset.x, 0.0f);
-    visibleRect.origin.y = MAX(self.contentOffset.y, 0.0f);
+    visibleRect.origin.x = fmaxf(self.contentOffset.x, 0.0f);
+    visibleRect.origin.y = fmaxf(self.contentOffset.y, 0.0f);
     visibleRect.size = self.bounds.size;
     
     float scale = 1.0 / self.zoomScale;
@@ -384,10 +384,10 @@
 }
 
 - (void)headerHandleTap:(UIGestureRecognizer *)gestureRecognizer {
-    if (self.gridViewDelegate && [self.gridViewDelegate respondsToSelector:@selector(gridView:didSelectHeaderCell:index:)]) {
-        
-        [self.gridViewDelegate gridView:self didSelectLeftCell:gestureRecognizer.view index:[self.leftViewRects indexOfObject:[NSValue valueWithCGRect:gestureRecognizer.view.frame]]];
-    }
+	if (self.gridViewDelegate && [self.gridViewDelegate respondsToSelector:@selector(gridView:didSelectHeaderCell:index:)]) {
+		
+		[self.gridViewDelegate gridView:self didSelectHeaderCell:gestureRecognizer.view index:[self.headerRects indexOfObject:[NSValue valueWithCGRect:gestureRecognizer.view.frame]]];
+	}
 }
 
 @end
